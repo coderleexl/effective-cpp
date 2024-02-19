@@ -35,6 +35,63 @@ void Algorithm::BubbleSort(std::vector<int> &arr)
     }
 }
 
+void Algorithm::QuickSort(std::vector<int> &arr)
+{
+    if (arr.size() < 3)
+    {
+        return;
+    }
+
+    return QuickSortImpl(arr, 0, arr.size() - 1);
+}
+
+// 挖坑法
+void Algorithm::QuickSortImpl(std::vector<int> &arr, int left, int right)
+{
+    if (right - left < 2)
+    {
+        return;
+    }
+
+    int k = arr[left];             // 取出首元素作为基准
+    int start = left, end = right; // 记录区间用于递归
+    int iMove = 1;                 // 当前移动的是左指针还是右指针 0表示左边 1表示右边
+    while (left < right)
+    {
+
+        // 从右往左找到第一个比k大的 移到left
+        switch (iMove)
+        {
+        case 1:
+            if (k > arr[right])
+            {
+                --right;
+                continue;
+            }
+            arr[left++] = arr[right];
+            iMove = 0;
+            break;
+
+        // 从右往左找到第一个比k小的 移到right
+        default:
+            if (k < arr[left])
+            {
+                ++left;
+                continue;
+            }
+            arr[right--] = arr[left];
+            iMove = 1;
+            break;
+        }
+    }
+
+    // 重合的位置就是中心轴的位置
+    arr[left] = k;
+
+    QuickSortImpl(arr, start, left - 1);
+    QuickSortImpl(arr, left + 1, end);
+}
+
 //  链表逆序
 //  记录前一个节点
 //  将节点强行改变指向

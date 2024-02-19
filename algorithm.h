@@ -7,7 +7,9 @@ namespace Algorithm
     void InsertSort(std::vector<int> &arr);
     // 冒泡
     void BubbleSort(std::vector<int> &arr);
-
+    // 快排
+    void QuickSort(std::vector<int> &arr);
+    void QuickSortImpl(std::vector<int> &arr, int left, int right);
     // 链表逆序
     ListNode *trainningPlan(ListNode *head);
 

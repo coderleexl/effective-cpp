@@ -10,6 +10,8 @@
 #include <unordered_map>
 #include <gtest/gtest.h>
 #include <stack>
+#include <stdio.h>
+#include <string.h>
 
 template <class T>
 bool funcPrint(T a)
