@@ -3,6 +3,7 @@
 
 namespace Algorithm
 {
+    using std::vector;
     // 插入
     void InsertSort(std::vector<int> &arr);
     // 冒泡
@@ -28,6 +29,9 @@ namespace Algorithm
     int countTarget(std::vector<int> &scores, int target);
     // 计算连续的数组中缺少的一个数
     int takeAttendance(std::vector<int> &records);
+    // 二维数组里面寻找目标值 target  数组下边不小于上面 右边不小于左边  左右有序 上下有序
+    bool findTargetIn2DPlants(vector<vector<int>> &plants, int target);
+    bool findTargetIn2DPlants(vector<vector<int>> &plants, int target, int i, int j);
 };
 // 最小栈
 class MinStack

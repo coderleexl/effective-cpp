@@ -290,3 +290,34 @@ int Algorithm::takeAttendance(std::vector<int> &records)
     }
     return i;
 }
+
+bool Algorithm::findTargetIn2DPlants(vector<vector<int>> &plants, int target)
+{
+    if (plants.empty() || plants[0].empty())
+    {
+        return false; // 空矩阵，不存在目标值
+    }
+
+    return findTargetIn2DPlants(plants, target, 0, plants[0].size() - 1);
+}
+
+// 将矩阵旋转45度 可以得到一张图 类似平衡二叉树遍历
+bool Algorithm::findTargetIn2DPlants(vector<vector<int>> &plants, int target, int i, int j)
+{
+    if (i > plants[0].size() || j < 0)
+    {
+        return false;
+    }
+
+    // 当前元素与目标值比较
+    if (plants[i][j] == target)
+    {
+        return true;
+    }
+    else if (plants[i][j] > target)
+    {
+        // 目标值在当前元素的左边列，递归搜索左边的子矩阵和上方的子矩阵
+        return findTargetIn2DPlants(plants, target, i, j - 1);
+    }
+    return findTargetIn2DPlants(plants, target, i + 1, j);
+}
