@@ -3,6 +3,7 @@
 
 namespace Algorithm
 {
+    using std::string;
     using std::vector;
     // 插入
     void InsertSort(std::vector<int> &arr);
@@ -32,6 +33,19 @@ namespace Algorithm
     // 二维数组里面寻找目标值 target  数组下边不小于上面 右边不小于左边  左右有序 上下有序
     bool findTargetIn2DPlants(vector<vector<int>> &plants, int target);
     bool findTargetIn2DPlants(vector<vector<int>> &plants, int target, int i, int j);
+    // 找出字符串中第一个只出现一次的字符串
+    char dismantlingAction(string arr);
+    // 找出数组中最小的数字的值
+    int stockManagement(vector<int> &stock);
+    // 广度优先遍历树
+    std::vector<int> decorateRecord(TreeNode *root);
+    // 广度优先遍历树 把每一层的作为一个数组返回
+    vector<vector<int>> decorateRecordV2(TreeNode *root);
+    // 广度优先遍历树 把每一层的作为一个数组返回 ,每一层的打印顺序与上一层相反第一层除外
+    vector<vector<int>> decorateRecordV3(TreeNode *root);
+    // 判断树A是否包含树B
+    bool isSubStructure(TreeNode *A, TreeNode *B);
+    bool treeCompare(TreeNode *A, TreeNode *B);
 };
 // 最小栈
 class MinStack

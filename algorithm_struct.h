@@ -1,3 +1,5 @@
+#include "variant.h"
+
 struct ListNode
 {
     int val;
@@ -20,4 +22,16 @@ public:
         next = NULL;
         random = NULL;
     }
+};
+
+// 二叉树
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    static TreeNode *CreateTree(const std::vector<std::optional<int>> &values);
 };

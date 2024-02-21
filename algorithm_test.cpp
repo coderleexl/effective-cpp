@@ -1,12 +1,12 @@
 #include "algorithm.h"
-TEST(TestAlgorithm, TestCountTarget)
+TEST(Algorithm, CountTarget)
 {
     printf("TestCountTarget Running\n");
     std::vector<int> vec{2, 2, 3, 4, 4, 4, 5, 6, 6, 8};
     ASSERT_TRUE(Algorithm::countTarget(vec, 4) == 3);
 }
 
-TEST(TestAlgorithm, TestQuickSort)
+TEST(Algorithm, QuickSort)
 {
     printf("TestQuickSort Running\n");
     std::vector<int> vec{8, 7, 9, 7, 10, 4, 11, 7, 12, 4, 14, 5, 15, 5, 15};
@@ -14,7 +14,7 @@ TEST(TestAlgorithm, TestQuickSort)
     ASSERT_TRUE(vec[0] == 15 && *--vec.end() == 4);
 }
 
-TEST(TestAlgorithm, findTargetIn2DPlants)
+TEST(Algorithm, findTargetIn2DPlants)
 {
     std::vector<int> vec{2, 3, 6, 8};
     std::vector<int> vec1{4, 5, 8, 9};
@@ -25,6 +25,53 @@ TEST(TestAlgorithm, findTargetIn2DPlants)
     std::vector<int> vec4{6};
     std::vector<std::vector<int>> arr1{vec3, vec4};
 
-    ASSERT_TRUE(Algorithm::findTargetIn2DPlants(arr, 11));
+    ASSERT_FALSE(Algorithm::findTargetIn2DPlants(arr, 11));
     // ASSERT_TRUE(Algorithm::findTargetIn2DPlants(arr1, 6));
+}
+
+TEST(Algorithm, dismantlingAction)
+{
+    std::string arr1 = "aabbccd";
+    std::string arr2 = "aaccddaa";
+
+    ASSERT_TRUE((Algorithm::dismantlingAction(arr1) != ' ') && Algorithm::dismantlingAction(arr2) == ' ');
+}
+
+TEST(Algorithm, decorateRecord)
+{
+    std::vector<std::optional<int>> values = {8, 17, 21, 18, std::nullopt, std::nullopt, 6};
+    TreeNode *root = TreeNode::CreateTree(values);
+    auto ret = Algorithm::decorateRecord(root);
+    std::vector<int> ExpectedResults{8, 17, 21, 18, 6};
+    ASSERT_TRUE(ExpectedResults == ret);
+}
+
+TEST(Algorithm, decorateRecordV2)
+{
+    std::vector<std::optional<int>> values = {8, 17, 21, 18, std::nullopt, std::nullopt, 6};
+    TreeNode *root = TreeNode::CreateTree(values);
+    auto ret = Algorithm::decorateRecordV2(root);
+    std::vector<std::vector<int>> ExpectedResults{
+        {8}, {17, 21}, {18, 6}};
+    ASSERT_TRUE(ExpectedResults == ret);
+}
+
+TEST(Algorithm, decorateRecordV3)
+{
+    std::vector<std::optional<int>> values = {8, 17, 21, 18, std::nullopt, std::nullopt, 6};
+    TreeNode *root = TreeNode::CreateTree(values);
+    auto ret = Algorithm::decorateRecordV3(root);
+    std::vector<std::vector<int>> ExpectedResults{
+        {8}, {17, 21}, {6, 18}};
+    ASSERT_TRUE(ExpectedResults == ret);
+}
+TEST(Algorithm, isSubStructure)
+{
+    std::vector<std::optional<int>> values = {3, 6, 7, 1, 8};
+    std::vector<std::optional<int>> values2 = {6, 1};
+    std::vector<std::optional<int>> values3 = {1, 6};
+    TreeNode *A = TreeNode::CreateTree(values);
+    TreeNode *B = TreeNode::CreateTree(values2);
+    TreeNode *C = TreeNode::CreateTree(values3);
+    ASSERT_TRUE(Algorithm::isSubStructure(A, B) && !Algorithm::isSubStructure(A, C));
 }

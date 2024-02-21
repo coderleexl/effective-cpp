@@ -298,13 +298,15 @@ bool Algorithm::findTargetIn2DPlants(vector<vector<int>> &plants, int target)
         return false; // 空矩阵，不存在目标值
     }
 
+    // 从右上开始
     return findTargetIn2DPlants(plants, target, 0, plants[0].size() - 1);
 }
 
 // 将矩阵旋转45度 可以得到一张图 类似平衡二叉树遍历
 bool Algorithm::findTargetIn2DPlants(vector<vector<int>> &plants, int target, int i, int j)
 {
-    if (i > plants[0].size() || j < 0)
+    // i是纵坐标 j是横坐标
+    if (i >= plants.size() || j < 0)
     {
         return false;
     }
@@ -320,4 +322,187 @@ bool Algorithm::findTargetIn2DPlants(vector<vector<int>> &plants, int target, in
         return findTargetIn2DPlants(plants, target, i, j - 1);
     }
     return findTargetIn2DPlants(plants, target, i + 1, j);
+}
+
+char Algorithm::dismantlingAction(string arr)
+{
+    std::unordered_map<char, bool> hmap;
+    for (const auto &str : arr)
+    {
+        if (hmap.find(str) != hmap.end())
+        {
+            hmap[str] = false;
+        }
+        else
+        {
+            hmap[str] = true;
+        }
+    }
+    for (const auto &str : arr)
+    {
+        if (hmap[str])
+            return str;
+    }
+    return ' ';
+}
+
+int Algorithm::stockManagement(vector<int> &stock)
+{
+    if (stock.size() < 1)
+    {
+        return -1;
+    }
+
+    int k = stock[0];
+    for (const int &it : stock)
+    {
+        if (it < k)
+            k = it;
+    }
+    return k;
+}
+
+std::vector<int> Algorithm::decorateRecord(TreeNode *root)
+{
+    std::vector<int> ret;
+    if (root == nullptr)
+        return ret;
+
+    std::queue<TreeNode *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        auto node = q.front();
+        q.pop();
+
+        if (node->left)
+            q.push(node->left);
+
+        if (node->right)
+            q.push(node->right);
+
+        ret.emplace_back(node->val);
+    }
+
+    return ret;
+}
+
+std::vector<std::vector<int>> Algorithm::decorateRecordV2(TreeNode *root)
+{
+    std::vector<std::vector<int>> ret;
+    if (root == nullptr)
+        return ret;
+
+    std::queue<TreeNode *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        int size = q.size();
+
+        std::vector<int> level;
+        for (size_t i = 0; i < size; i++)
+        {
+            auto node = q.front();
+            q.pop();
+
+            if (node->left)
+                q.push(node->left);
+
+            if (node->right)
+                q.push(node->right);
+            level.emplace_back(node->val);
+        }
+
+        ret.emplace_back(level);
+    }
+
+    return ret;
+}
+
+std::vector<std::vector<int>> Algorithm::decorateRecordV3(TreeNode *root)
+{
+    std::vector<std::vector<int>> ret;
+    if (root == nullptr)
+        return ret;
+
+    std::queue<TreeNode *> q;
+    q.push(root);
+
+    bool order = false;
+
+    while (!q.empty())
+    {
+        int size = q.size();
+
+        std::vector<int> level(size);
+        for (size_t i = 0; i < size; i++)
+        {
+            auto node = q.front();
+            q.pop();
+
+            if (node->left)
+                q.push(node->left);
+
+            if (node->right)
+                q.push(node->right);
+
+            if (order)
+            {
+                level[i] = node->val;
+            }
+            else
+            {
+                level[size - i - 1] = node->val;
+            }
+        }
+
+        ret.emplace_back(level);
+
+        order = !order;
+    }
+
+    return ret;
+}
+
+// 遍历加递归比较
+bool Algorithm::isSubStructure(TreeNode *A, TreeNode *B)
+{
+    if (A == nullptr)
+        return false;
+
+    if (B == nullptr)
+        return true;
+
+    std::queue<TreeNode *> q;
+    q.push(A);
+
+    while (!q.empty())
+    {
+        auto node = q.front();
+        q.pop();
+
+        if (treeCompare(node, B))
+            return true;
+
+        if (node->left)
+            q.push(node->left);
+
+        if (node->right)
+            q.push(node->right);
+    }
+
+    return false;
+}
+
+// 递归比较
+bool Algorithm::treeCompare(TreeNode *A, TreeNode *B)
+{
+    if (B == nullptr)
+        return true;
+    if (A == nullptr || A->val != B->val)
+        return false;
+
+    return treeCompare(A->left, B->left) || (A->right, B->right);
 }
