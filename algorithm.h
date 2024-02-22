@@ -46,6 +46,9 @@ namespace Algorithm
     // 判断树A是否包含树B
     bool isSubStructure(TreeNode *A, TreeNode *B);
     bool treeCompare(TreeNode *A, TreeNode *B);
+
+    //求N的阶乘
+    int CalcFactorial(int n);
 };
 // 最小栈
 class MinStack

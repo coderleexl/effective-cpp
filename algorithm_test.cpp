@@ -75,3 +75,9 @@ TEST(Algorithm, isSubStructure)
     TreeNode *C = TreeNode::CreateTree(values3);
     ASSERT_TRUE(Algorithm::isSubStructure(A, B) && !Algorithm::isSubStructure(A, C));
 }
+
+TEST(Algorithm, CalcFactorial)
+{
+    ASSERT_TRUE(Algorithm::CalcFactorial(3)==6);
+}
+

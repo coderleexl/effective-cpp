@@ -506,3 +506,17 @@ bool Algorithm::treeCompare(TreeNode *A, TreeNode *B)
 
     return treeCompare(A->left, B->left) || (A->right, B->right);
 }
+
+int Algorithm::CalcFactorial(int n)
+{
+    std::vector<int> f(n+1);
+    
+    f[0]=0;
+    f[1]=1;
+    for(int i=2;i<n+1;++i){
+        f[i]=i*f[i-1];
+    }
+
+    return f[n];
+}
+
