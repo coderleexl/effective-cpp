@@ -497,6 +497,8 @@ bool Algorithm::isSubStructure(TreeNode *A, TreeNode *B)
 }
 
 // 递归比较
+// 如果子树为空说明包含
+// 如果根树为空 或者值不一样就不继续递归
 bool Algorithm::treeCompare(TreeNode *A, TreeNode *B)
 {
     if (B == nullptr)
@@ -520,3 +522,84 @@ int Algorithm::CalcFactorial(int n)
     return f[n];
 }
 
+TreeNode *Algorithm::mirrorTree(TreeNode *root)
+{
+    if (root == nullptr)
+        return root;
+
+    std::queue<TreeNode *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        auto node = q.front();
+        q.pop();
+
+        std::swap(node->left, node->right);
+
+        if (node->left)
+            q.push(node->left);
+
+        if (node->right)
+            q.push(node->right);
+    }
+
+    return root;
+}
+
+bool Algorithm::checkSymmetricTree(TreeNode *root)
+{
+    return treeCompareV2(root->left, root->right);
+}
+
+bool Algorithm::treeCompareV2(TreeNode *left, TreeNode *right)
+{
+    // 全都是nullptr相等
+    if (!left && !right)
+        return true;
+    // 过滤调全空之后，其中有一个为空就不等
+    if (!left || !right)
+        return false;
+    // 值不一样 不等
+    if (left->val != right->val)
+        return false;
+
+    return treeCompareV2(left->left, right->right) && treeCompareV2(right->left, left->right);
+}
+
+int Algorithm::fib(int n)
+{
+    if (n == 0)
+        return 0;
+    if (n == 1)
+        return 1;
+
+    std::vector<int> f(n + 1);
+    f[0] = 0;
+    f[1] = 1;
+    for (size_t i = 2; i < n + 1; i++)
+    {
+        f[i] = f[i - 1] + f[i - 2];
+    }
+
+    return f[n];
+}
+
+int Algorithm::bestTiming(vector<int> &prices)
+{
+    if (prices.size() < 2)
+        return 0;
+    if (std::is_sorted(prices.begin(), prices.end()) && prices[0] > prices[1])
+        return 0;
+
+    int min = prices[0];
+    int ret = 0;
+
+    for (int i = 0; i < prices.size(); ++i)
+    {
+        ret = std::max(ret, prices[i] - min);
+        min = std::min(prices[i], min);
+    }
+
+    return ret;
+}

@@ -49,7 +49,17 @@ namespace Algorithm
 
     //求N的阶乘
     int CalcFactorial(int n);
-};
+  // 翻转二叉树
+    TreeNode *mirrorTree(TreeNode *root);
+    // 判断是否是对称树
+    bool checkSymmetricTree(TreeNode *root);
+    bool treeCompareV2(TreeNode *left, TreeNode *right);
+    // 斐波那契数 F(0) = 0，F(1) = 1 F(n) = F(n - 1) + F(n - 2)
+    // 今天的有氧运动训练内容是在一个长条形的平台上跳跃。平台有 num 个小格子，每次可以选择跳 一个格子 或者 两个格子。请返回在训练过程中，学员们共有多少种不同的跳跃方式。
+    int fib(int n);
+    // https://leetcode.cn/problems/gu-piao-de-zui-da-li-run-lcof/submissions/406855359/
+    // 寻找最大利润
+    int bestTiming(vector<int> &prices);};
 // 最小栈
 class MinStack
 {
