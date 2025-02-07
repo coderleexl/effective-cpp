@@ -6,10 +6,15 @@
 #include "algorithm.h"
 #include "class.h"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-    std::cout << "Hello, from effective-cpp!\n";
-    ::testing::InitGoogleTest(&argc, argv);
+	std::cout << "Hello, from effective-cpp!\n";
+	::testing::InitGoogleTest(&argc, argv);
+	(void)RUN_ALL_TESTS();
 
-    return RUN_ALL_TESTS();
+#ifdef _WIN32
+	system("pause");
+#endif // _WIN32
+
+	return 0;
 }
